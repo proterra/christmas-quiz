@@ -1,0 +1,176 @@
+/*
+ * Start Bootstrap - Full Width Pics (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+a:hover {
+    text-decoration: none;
+}
+
+ul.socialbtns img {
+    width: 35px;
+}
+
+ul.socialbtns a {
+    color: white;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+p {
+    font-size: 16px;
+}
+
+.jumbotron  p{
+   font-size: 2vw;
+}
+
+.jumbotron .header-text .h1 {
+    padding-top: 0px;
+}
+
+.highlight {
+    background: yellow;
+}
+
+.header-text {
+    font-size: 500%;
+    color: white;
+    font-family: 'Roboto ', sans-serif;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.hdr-title {
+    height: 100%;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.hdr-img {
+    padding: 1em;
+    height: 60%;
+    width: 60%;
+}
+
+.jumbotron {
+    padding: 1em;
+    background-image: url('../img/header_p.jpg');
+}
+
+.social {
+    padding: 1em;
+    background-color: white;
+    border-style: solid;
+    border-color: #4281a4;
+    border-radius: 6px;
+    margin-bottom: 2em;
+}
+
+.jumbotron .titleBlue {
+    color: #bfb8ad;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+}
+
+.qa {
+    font-size: 20px;
+    font-weight: bold;
+    color: #a94442;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.hideAll {
+    display: none;
+    !important
+}
+
+.answer {
+    padding: 10px;
+    display: none;
+    border-style: solid;
+    border-color: #bfb8ad;
+    border-radius: 6px;
+}
+
+.question {
+    background-color: #eadeda;
+    border-right-style: solid;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+
+
+body {
+    margin-top: 50px;
+    /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.image-bg-fluid-height, .image-bg-fixed-height {
+    text-align: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.image-bg-fluid-height {
+    background: url('../img/header-frost.png') no-repeat center center scroll;
+    padding: 100px 0;
+    background-color: #998888;
+}
+
+.image-bg-fixed-height {
+    background: url('../img/halfheader.png') no-repeat center center scroll;
+}
+
+.img-center {
+    margin: 0 auto;
+}
+
+.section-heading {
+    font-size: 1em;
+    !important padding-top: 0px;
+}
+
+.section-lead {
+    margin: 30px 0;
+}
+
+.section-paragraph {
+    margin: 30px 0;
+}
+
+footer {
+    margin: 50px 0;
+    color: #eadeda;
+}
+
+footer a {
+    color: #998888;
+}
+
+@media(max-width:768px) {
+    section {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    .section-heading {
+        font-size: 2em;
+    }
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
