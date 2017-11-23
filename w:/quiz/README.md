@@ -1,11 +1,7 @@
 
 
-docker build -t quiz .
-docker run -p 8081:80 -d --name proterra-quiz quiz
-
-
-ip addr show docker0 | grep -Po 'inet \K[\d.]+'  
-
+docker build -t my-php-app .
+docker run -d --name my-running-app my-php-app
 
 We recommend that you add a custom php.ini configuration. COPY it into /usr/local/etc/php by adding one more line to the Dockerfile above and running the same commands to build and run:
 
