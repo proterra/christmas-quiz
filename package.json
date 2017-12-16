@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Christmas WebSite",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "fuse.js": "^3.2.0"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-exec": "^2.1.3",

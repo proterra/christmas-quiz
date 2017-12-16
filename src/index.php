@@ -75,17 +75,15 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-//error handler function
-function customError($errno, $errstr) {
-  echo "<b>Error:</b> [$errno] $errstr";
-}
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
-//set error handler
-set_error_handler("customError");
+// create a log channel
+$log = new Logger('name');
+$log->pushHandler(new StreamHandler('/tmp/php.log', Logger::WARNING));
 
 $json='';
-$validYears = array('2006','2007','2009','2010','2012','2013','2014','2015','2016');
-
+$validYears = array('2006','2007','2009','2010','2012','2013','2014','2015','2016','2017');
 
 if (array_key_exists("year",$_GET)){
    $year = htmlspecialchars($_GET["year"]);
@@ -95,6 +93,8 @@ if (array_key_exists("year",$_GET)){
 } else {
    $year = 'index';
 }
+
+$log->info('Year being display',array($year));
 
 // load in all the data
 $filename = './data/data.json';
@@ -114,39 +114,50 @@ if ($year!='index'){
    $current = '2016';
    $yearstr = '2016';// $json[$current]['year'];
    $themestr = ' Quiz';// $json[$current]['theme'];
-   //$iconstr = $json[$current]['icon'];
    $iconstr = "snow-globe.png";
    $descstr = "is now out - questions only!";//$json[$current]['description'];
 }
+// echo "<pre>";
+// print_r($json);
+// echo "</pre>";
 
 ?>
+
 <header class="jumbotron  ">
    <div class="row vertical-align">
         <div class="col-md-4">
-            <!--<img class="center-block img-responsive hdr-img" src="./img/png/snow-globe.png" alt="">-->
             <img class="center-block img-responsive hdr-img" <?php echo 'src="./img/png/' . $iconstr .'"'?>  alt="">
         </div>
         <div class="col-md-8 header-text ">
             <div class="hdr-title">
-            <h1 class="" > <?php echo $yearstr. ' ' . $themestr;?></h1>
+            <h1 class="" ><?php echo $yearstr. ' ' . $themestr;?></h1>
             <p><?php echo $descstr;?></p>
             </div >
         </div>
 
    </div>
 </header>
+
 <!-- Content Section -->
 <section class="section-heading">
     <div class="container">
 <?php
 if ($year!='index'){
-   $data = $json[$year];
+  echo "<pre>";
+  echo $year;
+   $data = 
+   array_filter($json['quizes'], function($v, $k) {
+     print_r ($v);
+            return $v['year'] == $year;
+        }, ARRAY_FILTER_USE_BOTH);
+
+   print_r($data);
+   echo "</pre>";     
 ?>
 
 <div class="row">
 <div class="col-md-4">
    <ul class="socialbtns ">
-      <!-- <img  src="./img/png/pdfmbw.png"/>-->
       <li type="button" class="btn btn-primary hvr-pulse"><?php echo '<a href="./data/ChristmasQuiz' .$year .'.pdf">'; ?> Questions &nbsp;<i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-download" aria-hidden="true"></i></a></li>
       <li type="button" class="btn btn-primary hvr-pulse"><?php echo '<a  href="./data/ChristmasQuiz' .$year .'_Answers.pdf">'; ?> Answers &nbsp;<i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-download" aria-hidden="true"></i></a></li>
    </ul>
@@ -193,7 +204,7 @@ if ($year!='index'){
 
    <!-- Grid of all the quizes -->
    <div class="row">
-   <?php foreach (array_reverse($json) as $field) {?>
+   <?php foreach (array_reverse($json['quizes']) as $field) {  ?>
       <div class="col-md-4 portfolio-item">
            <?php echo '<a href="./?year=' . $field['year'] . '">' ;?><img class="img-responsive center hvr-pulse" <?php echo 'src="./img/png/' . $field['icon'] .'"'?> alt=""></a>
            <h3><?php echo '<a href="./?year=' . $field['year'] . '">' ;  echo $field['year']. ' '. $field['theme'];?></a></h3>
