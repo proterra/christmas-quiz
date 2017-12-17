@@ -56,9 +56,9 @@
                        <li>
                            <a href="#"  data-toggle="modal" data-target="#credit_modal">Credits</a>
                        </li>
-                       <li>
+                       <!-- <li>
                           <a href="./?year=2016" ><b>For 2016 the theme is Herbs and Spices!</b></a>
-                       </li>
+                       </li> -->
                    </ul>
                </div>
 
@@ -106,15 +106,18 @@ if(!file_exists($filename)){
 }
 
 if ($year!='index'){
-   $yearstr = $json[$year]['year'];
-   $themestr = $json[$year]['theme'];
-   $iconstr = $json[$year]['icon'];
-   $descstr = $json[$year]['description'];
+      $data = array_values(array_filter($json['quizes'], function($v, $k) use($year) {
+        return $v['year'] == $year;
+    }, ARRAY_FILTER_USE_BOTH))[0];
+   $yearstr = $data['year'];
+   $themestr = $data['theme'];
+   $iconstr = $data['icon'];
+   $descstr = $data['description'];
 }else {
    $current = '2016';
-   $yearstr = '2016';// $json[$current]['year'];
+   $yearstr = '2017';// $json[$current]['year'];
    $themestr = ' Quiz';// $json[$current]['theme'];
-   $iconstr = "snow-globe.png";
+   $iconstr = "web-final-quiz-header.png";
    $descstr = "is now out - questions only!";//$json[$current]['description'];
 }
 // echo "<pre>";
@@ -123,17 +126,17 @@ if ($year!='index'){
 
 ?>
 
-<header class="jumbotron  ">
+<header class="jumbotron">
    <div class="row vertical-align">
-        <div class="col-md-4">
+        <div class="col-md-12">
             <img class="center-block img-responsive hdr-img" <?php echo 'src="./img/png/' . $iconstr .'"'?>  alt="">
         </div>
-        <div class="col-md-8 header-text ">
+        <!-- <div class="col-md-8 header-text ">
             <div class="hdr-title">
             <h1 class="" ><?php echo $yearstr. ' ' . $themestr;?></h1>
             <p><?php echo $descstr;?></p>
             </div >
-        </div>
+        </div> -->
 
    </div>
 </header>
@@ -145,13 +148,9 @@ if ($year!='index'){
 if ($year!='index'){
   echo "<pre>";
   echo $year;
-   $data = 
-   array_filter($json['quizes'], function($v, $k) {
-     print_r ($v);
-            return $v['year'] == $year;
-        }, ARRAY_FILTER_USE_BOTH);
 
-   print_r($data);
+
+  //  print_r($data);
    echo "</pre>";     
 ?>
 
@@ -166,10 +165,9 @@ if ($year!='index'){
 <div class="col-md-4">
    <ul class="socialbtns">
       <li type="button" id="showAll" class="btn btn-primary hvr-pulse">Show All Answers</li>
-      <li type="button" id="hideAll" class="btn btn-primary  hvr-pulse">Hide All Answers</li>
+      <li type="button" id="hideAll" class="btn btn-primary hvr-pulse">Hide All Answers</li>
    </ul>
 </div>
-
 
 <div class="col-md-4">
    <ul class="socialbtns">
