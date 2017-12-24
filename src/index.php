@@ -111,14 +111,14 @@ if ($year!='index'){
     }, ARRAY_FILTER_USE_BOTH))[0];
    $yearstr = $data['year'];
    $themestr = $data['theme'];
-   $iconstr = $data['icon'];
+  //  $iconstr = $data['icon'];
    $descstr = $data['description'];
 }else {
-   $current = '2016';
+   $current = '2017';
    $yearstr = '2017';// $json[$current]['year'];
    $themestr = ' Quiz';// $json[$current]['theme'];
    $iconstr = "web-final-quiz-header.png";
-   $descstr = "is now out - questions only!";//$json[$current]['description'];
+  //  $descstr = "is now out - questions only!";//$json[$current]['description'];
 }
 // echo "<pre>";
 // print_r($json);
@@ -128,16 +128,25 @@ if ($year!='index'){
 
 <header class="jumbotron">
    <div class="row vertical-align">
-        <div class="col-md-12">
-            <img class="center-block img-responsive hdr-img" <?php echo 'src="./img/png/' . $iconstr .'"'?>  alt="">
+
+        <?php
+if ($year!='index'){ 
+?>
+        <div class="col-md-8">
         </div>
-        <!-- <div class="col-md-8 header-text ">
+        <div class="col-md-8 header-text ">
             <div class="hdr-title">
             <h1 class="" ><?php echo $yearstr. ' ' . $themestr;?></h1>
             <p><?php echo $descstr;?></p>
             </div >
-        </div> -->
-
+        </div> 
+<?php } else { ?>
+  <div class="col-md-8">
+            <img class="center-block img-responsive hdr-img" <?php echo 'src="./img/png/' . $iconstr .'"'?>  alt="">
+        </div>
+        <div class="col-md-4">
+        </div>
+<?php } ?>
    </div>
 </header>
 
@@ -146,15 +155,12 @@ if ($year!='index'){
     <div class="container">
 <?php
 if ($year!='index'){
-  echo "<pre>";
-  echo $year;
-
-
-  //  print_r($data);
-   echo "</pre>";     
+  
 ?>
 
 <div class="row">
+
+
 <div class="col-md-4">
    <ul class="socialbtns ">
       <li type="button" class="btn btn-primary hvr-pulse"><?php echo '<a href="./data/ChristmasQuiz' .$year .'.pdf">'; ?> Questions &nbsp;<i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-download" aria-hidden="true"></i></a></li>
@@ -202,17 +208,17 @@ if ($year!='index'){
 
    <!-- Grid of all the quizes -->
    <div class="row">
-   <?php foreach (array_reverse($json['quizes']) as $field) {  ?>
-      <div class="col-md-4 portfolio-item">
-           <?php echo '<a href="./?year=' . $field['year'] . '">' ;?><img class="img-responsive center hvr-pulse" <?php echo 'src="./img/png/' . $field['icon'] .'"'?> alt=""></a>
+   <?php $count=0; foreach (array_reverse($json['quizes']) as $field) {  ?>
+      <div class="col-md-4 portfolio-item center-block">
+           <?php echo '<a href="./?year=' . $field['year'] . '">' ;?><img width="50%" class="img-responsive  hvr-pulse" <?php echo 'src="./img/png/' . $field['icon'] .'"'?> alt=""></a>
            <h3><?php echo '<a href="./?year=' . $field['year'] . '">' ;  echo $field['year']. ' '. $field['theme'];?></a></h3>
-           <p><?php echo $field['description']; ?></p>
+           
            <ul class="socialbtns">
-             <!-- <img  src="./img/png/pdfmbw.png"/>-->
-             <li type="button" class="btn btn-info  hvr-pulse"><?php echo '<a href="./data/ChristmasQuiz' . $field['year'] .'.pdf">'; ?> Q &nbsp;<i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-download" aria-hidden="true"></i></a></li>
+             <li type="button" class="btn btn-info hvr-pulse"><?php echo '<a href="./data/ChristmasQuiz' . $field['year'] .'.pdf">'; ?> Q &nbsp;<i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-download" aria-hidden="true"></i></a></li>
              <li type="button" class="btn btn-info hvr-pulse"><?php echo '<a  href="./data/ChristmasQuiz' . $field['year'] .'_Answers.pdf">'; ?> A &nbsp;<i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-download" aria-hidden="true"></i></a></li>
            </ul>
       </div>
+      <?php $count++; if ($count%3 == 0) echo '</div><div class="row">' ?>
    <?php } ?>
    </div>
 
@@ -299,13 +305,9 @@ if ($year!='index'){
 <!-- Footer -->
 <footer>
     <hr/>
-    <div class="container jumbotron">
+    <div class="container">
       <div class="row vertical-align">
-       <div class="col-sm-2">
-           <img class="center-block img-responsive hdr-img" src="./img/png/snow-globe.png" alt="">
-        </div>
-
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                <p class="smalltext">Please read the <a href="#"  data-toggle="modal" data-target="#credit_modal">Credits</a> for the details of the license. My contribution is Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 Icons from Flaticons (various authors), and Font Awesome.</p>
             </div>

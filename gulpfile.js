@@ -17,7 +17,7 @@ var reportOptions = {
 }
 gulp.task('docker' ,function() {
   gulp.src('./dockerfile')
-  .pipe(exec('docker kill proterra-quiz && docker rm proterra-quiz'),options)
+  .pipe(exec('docker kill proterra-quiz && docker rm proterra-quiz'),{continueOnError:true})
   .pipe(exec('docker build -t quiz .', options))
   .pipe(exec('docker run -p 3000:80 -d --name proterra-quiz quiz'),options)
   .pipe(exec.reporter(reportOptions));
